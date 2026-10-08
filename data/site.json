@@ -1,11 +1,17 @@
 {
   "title": "在世界之外，留一方属于我的世界。",
   "sub": "Beyond the world, I keep a world of my own.",
+  "intro": "这里不用于介绍我。这里保存我在数字世界里留下的痕迹。",
   "mood": "calm",
   "settings": {
     "sound": true,
     "daynight": true,
     "motion": true
   },
-  "memories": []
+  "memories": [],
+  "thoughts": [],
+  "journey": [],
+  "music": [],
+  "collection": [],
+  "future": []
 }

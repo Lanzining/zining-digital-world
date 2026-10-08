@@ -1,182 +1,73 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#dce5ec">
-<title>L · 梓宁的数字世界</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ece9e2"><title>L · ZINING</title>
 <style>
-:root{
-  --ink:#10161d;--soft:#eef3f6;--glass:rgba(245,249,252,.18);
-  --line:rgba(255,255,255,.42);--muted:rgba(225,232,237,.68);
-  --mx:50vw;--my:50vh;--tiltX:0deg;--tiltY:0deg;
-}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;overflow:hidden;background:#0d1218;color:#f5f8fa;
-font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif}
-button{font:inherit;color:inherit}
-button:focus-visible{outline:2px solid rgba(255,255,255,.8);outline-offset:4px}
-#world{position:fixed;inset:0;overflow:hidden;background:
-radial-gradient(70vw 55vw at var(--mx) var(--my),rgba(235,246,255,.22),transparent 58%),
-linear-gradient(145deg,#111820 0%,#1b252f 42%,#10171e 100%)}
-#world:before,#world:after{content:"";position:absolute;inset:-18%;pointer-events:none}
-#world:before{
-background:
-radial-gradient(38% 30% at 20% 18%,rgba(208,225,238,.20),transparent 70%),
-radial-gradient(34% 26% at 78% 22%,rgba(175,190,220,.14),transparent 70%),
-radial-gradient(45% 38% at 54% 78%,rgba(123,150,176,.12),transparent 72%);
-filter:blur(35px);animation:drift 22s ease-in-out infinite alternate;
-}
-#world:after{
-background:conic-gradient(from 210deg at 50% 45%,transparent 0 26%,rgba(255,255,255,.055) 34%,transparent 45% 64%,rgba(184,207,227,.06) 72%,transparent 80%);
-filter:blur(55px);mix-blend-mode:screen;animation:flow 30s linear infinite;
-}
-@keyframes drift{to{transform:translate3vw,-2vh) scale(1.04)}} 
-@keyframes flow{to{transform:rotate(10deg) scale(1.08)}}
-#frost{position:absolute;inset:-12%;
-background:
-radial-gradient(30vw 18vw at 35% 55%,rgba(255,255,255,.09),transparent 72%),
-radial-gradient(25vw 20vw at 72% 62%,rgba(177,201,223,.10),transparent 72%);
-filter:blur(28px);opacity:.9;transform:translate(calc((var(--mx) - 50vw)*-.012),calc((var(--my) - 50vh)*-.012));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-#halo{position:absolute;left:50%;top:50%;width:52vw;height:52vw;max-width:760px;max-height:760px;transform:translate(-50%,-50%);
-border-radius:50%;background:radial-gradient(circle,rgba(221,235,244,.055),transparent 58%);filter:blur(18px);opacity:.55}
-#architecture{position:absolute;inset:0;opacity:.28;transform:translate(calc((var(--mx) - 50vw)*-.006),calc((var(--my) - 50vh)*-.004));transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-#architecture i{position:absolute;display:block;border:1px solid rgba(218,231,240,.16);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0));box-shadow:0 30px 90px rgba(0,0,0,.12)}
-.a1{width:45vw;height:22vh;left:8vw;bottom:8vh;transform:perspective(900px) rotateY(20deg) skewY(-3deg)}
-.a2{width:32vw;height:30vh;right:4vw;bottom:15vh;transform:perspective(900px) rotateY(-22deg) skewY(3deg)}
-.a3{width:16vw;height:50vh;left:42vw;bottom:-8vh;transform:perspective(900px) rotateY(7deg)}
-.topbar{position:absolute;z-index:20;left:0;right:0;top:0;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-.brand{font-size:11px;letter-spacing:.28em;opacity:.78}.status{font-size:9px;letter-spacing:.24em;text-transform:uppercase;opacity:.42}
-.core{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,280px);height:min(22vw,280px);min-width:180px;min-height:180px;
-display:grid;place-items:center;border-radius:28px;cursor:pointer;transition:transform 1.1s cubic-bezier(.16,1,.3,1),filter .8s;outline:none}
-.core:before{content:"";position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.58),rgba(220,233,242,.12) 36%,transparent 69%);filter:blur(10px);opacity:.75}
-.core:after{content:"";position:absolute;inset:7%;border-radius:50%;border:1px solid rgba(255,255,255,.26);box-shadow:0 0 80px rgba(220,236,246,.13),inset 0 0 50px rgba(255,255,255,.05)}
-.core:hover{transform:translate(-50%,-50%) scale(1.035);filter:brightness(1.08)}
-.logo{position:relative;z-index:2;font-size:clamp(58px,9vw,128px);font-weight:200;letter-spacing:-.09em;line-height:1;text-shadow:0 2px 24px rgba(255,255,255,.18)}
-.core-caption{position:absolute;z-index:2;top:calc(100% + 18px);font-size:9px;letter-spacing:.34em;opacity:.48;white-space:nowrap}
-.objects{position:absolute;z-index:8;inset:0;pointer-events:none;opacity:0;transition:opacity .7s ease}
-.open .objects{opacity:1}
-.object{position:absolute;pointer-events:auto;width:clamp(150px,13vw,210px);height:clamp(92px,9vw,140px);border:1px solid var(--line);border-radius:30px;
-background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(230,239,245,.055) 52%,rgba(255,255,255,.02));
-backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%);
-box-shadow:0 24px 70px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.08);
-transform:translate3d(0,0,0) rotate(var(--r));transition:transform .65s cubic-bezier(.2,.8,.2,1),background .35s,border-color .35s;overflow:hidden}
-.object:before{content:"";position:absolute;width:90px;height:90px;border-radius:50%;left:var(--lx,45%);top:var(--ly,20%);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,.42),transparent 66%);filter:blur(10px);opacity:.45}
-.object:hover{transform:translate3d(0,-8px,0) rotate(0deg) scale(1.025);border-color:rgba(255,255,255,.7);background:linear-gradient(145deg,rgba(255,255,255,.27),rgba(230,239,245,.08))}
-.obj-inner{position:absolute;inset:18px;display:flex;flex-direction:column;justify-content:space-between}
-.num{font-size:9px;letter-spacing:.28em;opacity:.42}.name{font-size:15px;letter-spacing:.18em;font-weight:450}.desc{font-size:9px;letter-spacing:.12em;opacity:.45}
-.o1{left:10%;top:22%;--r:-5deg}.o2{right:10%;top:20%;--r:5deg}.o3{left:18%;top:66%;--r:4deg}.o4{right:16%;top:66%;--r:-4deg}
-.o5{left:50%;top:12%;transform:translateX(-50%) rotate(-2deg)}.o6{left:50%;bottom:9%;transform:translateX(-50%) rotate(2deg)}
-.o7{left:5%;top:47%;--r:-3deg}.o8{right:5%;top:46%;--r:3deg}
-.open .core{transform:translate(-50%,-50%) scale(.58);filter:brightness(.86);opacity:.52}
-.open .logo{animation:logoEnter 1.15s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes logoEnter{0%{transform:scale(1);letter-spacing:-.12em;filter:brightness(1)}45%{transform:scale(1.22);letter-spacing:-.2em;filter:brightness(1.6)}100%{transform:scale(.82);letter-spacing:-.05em;filter:brightness(.72)}}
-.scrim{position:absolute;z-index:5;inset:0;background:radial-gradient(circle at center,transparent 0,rgba(8,12,17,.03) 30%,rgba(8,12,17,.34) 100%);pointer-events:none}
-#room{position:fixed;z-index:40;inset:0;background:rgba(10,15,20,.36);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);opacity:0;pointer-events:none;transform:scale(1.03);transition:opacity .65s,transform .8s cubic-bezier(.16,1,.3,1)}
-#room.show{opacity:1;pointer-events:auto;transform:scale(1)}
-.room-card{position:absolute;inset:8vh 7vw;border:1px solid rgba(255,255,255,.26);border-radius:42px;background:linear-gradient(145deg,rgba(245,250,253,.13),rgba(220,233,241,.045));box-shadow:0 40px 120px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22);overflow:hidden}
-.room-head{padding:30px 34px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.10)}
-.room-title{font-size:clamp(20px,3vw,36px);font-weight:300;letter-spacing:.08em}.room-sub{font-size:9px;letter-spacing:.25em;opacity:.45;margin-top:8px}
-.close{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.08);border-radius:999px;padding:11px 16px;cursor:pointer;font-size:10px;letter-spacing:.16em}
-.gallery{height:calc(100% - 104px);overflow:auto;padding:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
-.tile{min-height:210px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);position:relative}
-.tile img{width:100%;height:100%;min-height:210px;object-fit:cover;display:block;opacity:.86;filter:saturate(.85)}
-.tile .meta{position:absolute;left:0;right:0;bottom:0;padding:42px 16px 15px;background:linear-gradient(transparent,rgba(0,0,0,.68));font-size:11px}
-.tile small{display:block;opacity:.5;margin-top:5px}
-.empty{grid-column:1/-1;display:grid;place-items:center;min-height:300px;opacity:.48;letter-spacing:.14em;font-size:11px}
-.hint{position:absolute;z-index:15;left:50%;bottom:7vh;transform:translateX(-50%);font-size:9px;letter-spacing:.28em;opacity:.38;white-space:nowrap;transition:opacity .4s}
-.open .hint{opacity:0}
-@media(max-width:760px){
-  .topbar{padding:20px}.status{display:none}
-  #halo{width:100vw;height:100vw;opacity:.42}
-  .core{min-width:150px;min-height:150px;width:42vw;height:42vw}
-  .object{width:142px;height:92px;border-radius:24px}
-  .o1{left:3%;top:17%}.o2{right:3%;top:17%}.o3{left:4%;top:70%}.o4{right:4%;top:70%}
-  .o5{top:8%}.o6{bottom:6%}.o7{left:0;top:45%}.o8{right:0;top:45%}
-  .room-card{inset:3vh 3vw;border-radius:28px}.room-head{padding:22px}.gallery{padding:18px;grid-template-columns:repeat(2,1fr);gap:12px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation:none!important;transition-duration:.01ms!important}
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
+:root{--paper:#ebe8e1;--ink:#171716;--soft:#716f69;--hair:rgba(23,23,22,.15);--accent:#9baeb8;--serif:"Cormorant Garamond",Georgia,serif;--sans:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300}button,a{font:inherit;color:inherit}.site{min-height:100vh;overflow:hidden}
+.noise{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.nav{position:fixed;z-index:20;left:0;right:0;top:0;padding:24px 4.5vw;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:multiply}
+.mark{font-family:var(--serif);font-size:24px;font-style:italic;letter-spacing:-.06em}.navlinks{display:flex;gap:24px;align-items:center}.navlinks button{background:none;border:0;font-size:10px;letter-spacing:.14em;cursor:pointer}.menu{width:38px;height:38px;border:1px solid var(--hair);border-radius:50%;background:rgba(255,255,255,.24);cursor:pointer}
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1.2fr;position:relative;padding:10vh 4.5vw 6vh;align-items:end}
+.hero-copy{padding-bottom:7vh;position:relative;z-index:2}.kicker{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);margin-bottom:24px}
+.hero h1{font-family:var(--serif);font-size:clamp(58px,9.2vw,150px);font-weight:300;line-height:.78;letter-spacing:-.055em;margin:0;max-width:7ch}
+.hero h1 em{font-weight:300}.hero-sub{margin-top:35px;max-width:430px;font-size:12px;line-height:1.9;color:#5f5d58}.enter{margin-top:35px;border:0;border-bottom:1px solid #77746e;background:none;padding:0 0 9px;font-size:10px;letter-spacing:.18em;cursor:pointer}
+.hero-art{height:80vh;position:relative;display:grid;place-items:center}
+.arch{position:absolute;inset:5% 2% 2% 7%;overflow:hidden}
+.arch:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 10%,rgba(255,255,255,.58) 35%,transparent 53%),linear-gradient(90deg,#c9c5bd 0 2%,transparent 2% 30%,#b9b7b1 30% 31%,transparent 31% 66%,#d8d5cf 66% 67%,transparent 67%);filter:blur(.2px);transform:skewX(-10deg)}
+.arch:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 52% 48%,rgba(241,245,244,.9),transparent 30%),linear-gradient(180deg,transparent 55%,rgba(31,32,31,.16));mix-blend-mode:screen}
+.line{position:absolute;background:#292a28}.line.v{width:1px;height:90%;left:50%;top:5%;opacity:.23}.line.h{height:1px;width:88%;left:6%;top:58%;opacity:.17}
+.floating-l{position:absolute;z-index:2;left:45%;top:42%;font-family:var(--serif);font-size:clamp(110px,17vw,260px);font-weight:300;font-style:italic;line-height:.7;color:#20211f;text-shadow:22px 26px 45px rgba(28,28,27,.13);animation:float 8s ease-in-out infinite;pointer-events:none}
+@keyframes float{50%{transform:translate3d(0,-12px,0) rotate(-2deg)}}
+.caption{position:absolute;right:1%;bottom:5%;font-size:9px;letter-spacing:.2em;color:#6f6d67;writing-mode:vertical-rl}
+.scrollcue{position:absolute;left:4.5vw;bottom:25px;font-size:8px;letter-spacing:.28em;color:#77746e}
+.section{padding:13vh 4.5vw;border-top:1px solid var(--hair)}.section-head{display:grid;grid-template-columns:1fr 2fr;gap:4vw;margin-bottom:70px}.eyebrow{font-size:9px;letter-spacing:.22em;color:var(--soft)}.section h2{font-family:var(--serif);font-size:clamp(44px,6vw,90px);font-weight:300;line-height:.9;margin:0;letter-spacing:-.04em}.intro{max-width:570px;margin-top:25px;color:#64615b;font-size:12px;line-height:2}
+.rooms{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+.room{min-height:260px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:25px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;position:relative;overflow:hidden;transition:background .45s,transform .45s}
+.room:hover{background:rgba(255,255,255,.34);transform:translateY(-4px);z-index:2}.room:nth-child(1){grid-column:span 7}.room:nth-child(2){grid-column:span 5}.room:nth-child(3){grid-column:span 4}.room:nth-child(4){grid-column:span 8}.room:nth-child(5){grid-column:span 5}.room:nth-child(6){grid-column:span 7}.room:nth-child(7){grid-column:span 8}.room:nth-child(8){grid-column:span 4}
+.room-num{font-size:9px;letter-spacing:.22em;color:var(--soft)}.room-title{font-family:var(--serif);font-size:48px;line-height:.8;font-weight:300}.room-note{font-size:9px;color:var(--soft);letter-spacing:.08em}.room-deco{position:absolute;right:-8%;top:8%;font-family:var(--serif);font-style:italic;font-size:180px;color:rgba(40,40,37,.045);transition:transform .7s}.room:hover .room-deco{transform:translate(-12px,10px) rotate(-4deg)}
+.archive{background:#191a18;color:#efede7}.archive .eyebrow{color:#9d9b94}.archive h2{color:#f3f0e8}.archive .intro{color:#b6b3aa}.archive-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:3vw}.memory-feature{min-height:520px;border:1px solid rgba(255,255,255,.14);position:relative;overflow:hidden;background:#252622}.memory-feature img{width:100%;height:100%;object-fit:cover;opacity:.82;filter:grayscale(.16)}.memory-feature .overlay{position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.72));display:flex;flex-direction:column;justify-content:end;padding:35px}.memory-feature h3{font-family:var(--serif);font-size:45px;font-weight:300;margin:0}.memory-side{display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:25px 0}.memory-side p{font-family:var(--serif);font-size:29px;line-height:1.05;margin:0}.memory-side button{align-self:flex-start;background:none;border:1px solid rgba(255,255,255,.3);padding:12px 18px;color:#fff;font-size:9px;letter-spacing:.16em;cursor:pointer}
+.footer{padding:10vh 4.5vw 35px;display:flex;justify-content:space-between;border-top:1px solid var(--hair);font-size:9px;color:var(--soft);letter-spacing:.12em}.modal{position:fixed;inset:0;z-index:40;background:rgba(20,21,19,.36);backdrop-filter:blur(22px);display:none;padding:5vh 5vw}.modal.open{display:block}.sheet{height:90vh;background:#efede7;color:#191a18;overflow:auto;border-radius:28px;box-shadow:0 30px 100px rgba(0,0,0,.25);padding:30px}.sheet-head{display:flex;justify-content:space-between;align-items:start;border-bottom:1px solid var(--hair);padding-bottom:20px}.sheet h3{font-family:var(--serif);font-size:65px;font-weight:300;margin:0}.close{border:1px solid var(--hair);background:none;border-radius:50%;width:40px;height:40px;cursor:pointer}.content-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:25px;background:var(--hair)}.item{background:#efede7;padding:28px;min-height:180px}.item h4{font-family:var(--serif);font-size:30px;font-weight:300;margin:0 0 15px}.item p{font-size:11px;line-height:1.9;color:#68655f}.item small{font-size:8px;letter-spacing:.18em;color:#8a877f}
+@media(max-width:800px){.nav{padding:18px 5vw}.navlinks{display:none}.hero{display:block;padding:15vh 5vw 8vh}.hero-copy{padding-bottom:0}.hero h1{font-size:19vw}.hero-art{height:48vh;margin-top:30px}.floating-l{left:38%;top:35%;font-size:42vw}.section{padding:10vh 5vw}.section-head{display:block;margin-bottom:45px}.section h2{font-size:60px;margin-top:12px}.rooms{display:block}.room{min-height:200px}.room-title{font-size:42px}.archive-grid{display:block}.memory-feature{height:55vh;min-height:0}.memory-side{min-height:260px;margin-top:20px}.content-list{grid-template-columns:1fr}.sheet{height:92vh;padding:22px}.sheet h3{font-size:50px}.footer{padding:8vh 5vw 25px;display:block}.footer div+div{margin-top:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div id="world">
-  <div id="frost"></div><div id="halo"></div>
-  <div id="architecture"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
-  <div class="scrim"></div>
-  <header class="topbar"><div class="brand">L · 梓宁</div><div class="status" id="status">私人数字世界</div></header>
+<div class="noise"></div><div class="site">
+<header class="nav"><div class="mark">L · ZINING</div><div class="navlinks"><button onclick="scrollToId('world')">世界</button><button onclick="scrollToId('memory')">记忆</button><button onclick="scrollToId('about')">关于</button><button class="menu" onclick="location.href='/control'">L</button></div><button class="menu" onclick="location.href='/control'">L</button></header>
+<section class="hero" id="top"><div class="hero-copy"><div class="kicker">L · ZINING / PRIVATE DIGITAL WORLD</div><h1 id="heroTitle">在世界之外，<br><em>留一方属于我的世界。</em></h1><div class="hero-sub" id="heroIntro">这里不用于介绍我。这里保存我在数字世界里留下的痕迹。</div><button class="enter" onclick="scrollToId('world')">进入这个世界　↘</button></div>
+<div class="hero-art"><div class="arch"></div><div class="line v"></div><div class="line h"></div><div class="floating-l">L</div><div class="caption">PRIVATE / 01 — ZINING</div></div><div class="scrollcue">SCROLL TO ENTER</div></section>
 
-  <main>
-    <button class="core" id="core" aria-label="Enter L · ZINING">
-      <span class="logo">L</span><span class="core-caption">进入我的世界</span>
-    </button>
-    <div class="objects" id="objects">
-      <button class="object o1" data-room="记忆"><span class="obj-inner"><span class="num">01</span><span class="name">记忆</span><span class="desc">私人记忆档案</span></span></button>
-      <button class="object o2" data-room="思绪"><span class="obj-inner"><span class="num">02</span><span class="name">思绪</span><span class="desc">思想碎片</span></span></button>
-      <button class="object o3" data-room="心境"><span class="obj-inner"><span class="num">03</span><span class="name">心境</span><span class="desc">内在天气</span></span></button>
-      <button class="object o4" data-room="旅途"><span class="obj-inner"><span class="num">04</span><span class="name">旅途</span><span class="desc">旅途与时间</span></span></button>
-      <button class="object o5" data-room="音乐"><span class="obj-inner"><span class="num">05</span><span class="name">音乐</span><span class="desc">声音空间</span></span></button>
-      <button class="object o6" data-room="未来"><span class="obj-inner"><span class="num">06</span><span class="name">未来</span><span class="desc">未来边界</span></span></button>
-      <button class="object o7" data-room="收藏"><span class="obj-inner"><span class="num">07</span><span class="name">收藏</span><span class="desc">收藏与艺术</span></span></button>
-      <button class="object o8" data-room="CONTROL"><span class="obj-inner"><span class="num">08</span><span class="name">L · 控制</span><span class="desc">世界引擎</span></span></button>
-    </div>
-    <div class="hint">移动光标感受空间 · 点击 L 进入</div>
-  </main>
-</div>
+<section class="section" id="world"><div class="section-head"><div class="eyebrow">01 / THE WORLD</div><div><h2>不是网站。<br>是一座正在生长的私人空间。</h2><p class="intro">从这里进入记忆、思绪、心境、旅途、音乐、收藏与未来。内容由 L · CONTROL 管理，展示层与后台使用同一份服务器数据。</p></div></div>
+<div class="rooms">
+<div class="room" onclick="openRoom('memories')"><span class="room-num">01</span><span class="room-title">记忆</span><span class="room-note">私人档案 / 数字展厅</span><span class="room-deco">M</span></div>
+<div class="room" onclick="openRoom('thoughts')"><span class="room-num">02</span><span class="room-title">思绪</span><span class="room-note">文字 / 碎片 / 当下</span><span class="room-deco">T</span></div>
+<div class="room" onclick="openRoom('mood')"><span class="room-num">03</span><span class="room-title">心境</span><span class="room-note">情绪 / 时间 / 天气</span><span class="room-deco">M</span></div>
+<div class="room" onclick="openRoom('journey')"><span class="room-num">04</span><span class="room-title">旅途</span><span class="room-note">地点 / 路途 / 时间</span><span class="room-deco">J</span></div>
+<div class="room" onclick="openRoom('music')"><span class="room-num">05</span><span class="room-title">音乐</span><span class="room-note">声音 / 氛围 / 片段</span><span class="room-deco">S</span></div>
+<div class="room" onclick="openRoom('future')"><span class="room-num">06</span><span class="room-title">未来</span><span class="room-note">计划 / 愿望 / 下一站</span><span class="room-deco">F</span></div>
+<div class="room" onclick="openRoom('collection')"><span class="room-num">07</span><span class="room-title">收藏</span><span class="room-note">艺术 / 物件 / 灵感</span><span class="room-deco">C</span></div>
+<div class="room" onclick="location.href='/control'"><span class="room-num">08</span><span class="room-title">控制</span><span class="room-note">L · CONTROL / 世界引擎</span><span class="room-deco">L</span></div>
+</div></section>
 
-<section id="room" aria-hidden="true">
-  <div class="room-card">
-    <div class="room-head"><div><div class="room-title" id="roomTitle">记忆</div><div class="room-sub" id="roomSub">私人记忆档案</div></div><button class="close" id="close">关闭</button></div>
-    <div class="gallery" id="gallery"></div>
-  </div>
-</section>
+<section class="section archive" id="memory"><div class="section-head"><div class="eyebrow">02 / MEMORY</div><div><h2>记忆不是相册。<br>它是一件件作品。</h2><p class="intro">照片、日期与文字会被保存成数字展品。公开作品出现在这里；私人作品只存在于你的控制中心。</p></div></div>
+<div class="archive-grid"><div class="memory-feature" id="featured"><div class="overlay"><div style="font-size:9px;letter-spacing:.2em;opacity:.6">LATEST MEMORY</div><h3 id="featureTitle">等待第一件作品</h3><div id="featureDate" style="font-size:9px;opacity:.55;margin-top:8px"></div></div></div><div class="memory-side"><p id="memoryQuote">“有些东西不需要解释，只需要被好好保存。”</p><button onclick="openRoom('memories')">查看全部记忆　↗</button></div></div></section>
 
+<section class="section" id="about"><div class="section-head"><div class="eyebrow">03 / L · ZINING</div><div><h2>留下一些真实的东西。</h2><p class="intro" id="aboutText">一个属于自己的数字领地。它可以随着时间、情绪与记忆不断改变。</p></div></div></section>
+<footer class="footer"><div>L · ZINING</div><div>PRIVATE DIGITAL WORLD · 2026</div></footer></div>
+
+<div class="modal" id="modal"><div class="sheet"><div class="sheet-head"><div><div class="eyebrow" id="modalEyebrow">ROOM</div><h3 id="modalTitle">记忆</h3></div><button class="close" onclick="closeRoom()">×</button></div><div class="content-list" id="modalContent"></div></div></div>
 <script>
-const world=document.getElementById('world'), core=document.getElementById('core'), room=document.getElementById('room');
-const gallery=document.getElementById('gallery'), roomTitle=document.getElementById('roomTitle'), roomSub=document.getElementById('roomSub');
-let memories=[];
-
-function pointer(x,y){
-  document.documentElement.style.setProperty('--mx',x+'px');
-  document.documentElement.style.setProperty('--my',y+'px');
-  const rx=((y-innerHeight/2)/innerHeight)*3, ry=((x-innerWidth/2)/innerWidth)*-3;
-  document.documentElement.style.setProperty('--tiltX',rx+'deg');
-  document.documentElement.style.setProperty('--tiltY',ry+'deg');
-  document.querySelectorAll('.object').forEach((el,i)=>{
-    const r=el.getBoundingClientRect(), dx=x-(r.left+r.width/2), dy=y-(r.top+r.height/2);
-    const d=Math.hypot(dx,dy), f=Math.max(0,1-d/420);
-    el.style.transform=`translate3d(${dx*f*.018}px,${dy*f*.018}px,0) rotate(var(--r))`;
-    el.style.setProperty('--lx',(50-dx/8)+'%'); el.style.setProperty('--ly',(30-dy/8)+'%');
-  });
-}
-addEventListener('pointermove',e=>pointer(e.clientX,e.clientY),{passive:true});
-addEventListener('touchmove',e=>{const t=e.touches[0]; if(t) pointer(t.clientX,t.clientY)},{passive:true});
-
-core.addEventListener('click',()=>world.classList.toggle('open'));
-document.querySelectorAll('.object').forEach(el=>el.addEventListener('click',()=>openRoom(el.dataset.room)));
-
-async function load(){
-  try{
-    const r=await fetch('/api/public',{cache:'no-store'}); const d=await r.json();
-    memories=d.memories||[];
-    if(d.title) document.getElementById('status').textContent='私人数字世界';
-  }catch(e){}
-}
-function openRoom(name){
-  if(name==='记忆'){renderMemory();roomTitle.textContent='记忆';roomSub.textContent='私人记忆档案'}
-  else if(name==='CONTROL'){location.href='/control';return}
-  else {gallery.innerHTML='<div class="empty">这个空间正在形成 · 世界会在这里继续生长</div>';roomTitle.textContent=name;roomSub.textContent='正在形成'}
-  room.classList.add('show');room.setAttribute('aria-hidden','false');
-}
-function renderMemory(){
-  if(!memories.length){gallery.innerHTML='<div class="empty">NO 记忆 HAS BEEN PLACED HERE YET</div>';return}
-  gallery.innerHTML=memories.map(m=>`<article class="tile"><img src="${m.file}" alt=""><div class="meta">${escapeHtml(m.title||'未命名记忆')}<small>${escapeHtml(m.date||'')}</small></div></article>`).join('');
-}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-document.getElementById('close').addEventListener('click',()=>room.classList.remove('show'));
-room.addEventListener('click',e=>{if(e.target===room)room.classList.remove('show')});
-load();
+let DATA={memories:[]};
+const labels={memories:['MEMORY','记忆'],thoughts:['THOUGHTS','思绪'],mood:['MOOD','心境'],journey:['JOURNEY','旅途'],music:['MUSIC','音乐'],future:['FUTURE','未来'],collection:['COLLECTION','收藏']};
+async function load(){try{const r=await fetch('/api/public',{cache:'no-store'});DATA=await r.json();document.getElementById('heroTitle').innerHTML=esc(DATA.title||'在世界之外，<br>留一方属于我的世界。');document.getElementById('heroIntro').textContent=DATA.intro||'';document.getElementById('aboutText').textContent=DATA.intro||'';renderFeature()}catch(e){console.warn(e)}}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderFeature(){let m=(DATA.memories||[])[0];if(!m)return;document.getElementById('featured').style.backgroundImage=`url('${m.file}')`;document.getElementById('featured').style.backgroundSize='cover';document.getElementById('featured').style.backgroundPosition='center';document.getElementById('featureTitle').textContent=m.title||'未命名记忆';document.getElementById('featureDate').textContent=m.date||''}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function openRoom(kind){if(kind==='control'){location.href='/control';return}const [en,cn]=labels[kind];document.getElementById('modalEyebrow').textContent=en;document.getElementById('modalTitle').textContent=cn;const arr=kind==='mood'?[{title:({'calm':'平静','happy':'明亮','low':'低语','confused':'游移'}[DATA.mood||'calm']),body:'此刻的世界会随着你的心境改变。',date:'NOW'}]:(DATA[kind]||[]);const c=document.getElementById('modalContent');if(!arr.length){c.innerHTML='<div class="item" style="grid-column:1/-1"><h4>这里还没有内容。</h4><p>可以在 L · CONTROL 中添加。保存后，前台会自动同步。</p></div>'}else c.innerHTML=arr.map(x=>`<article class="item">${x.file?`<img src="${x.file}" style="width:100%;height:240px;object-fit:cover;margin-bottom:18px">`:''}<small>${esc(x.date||'')}</small><h4>${esc(x.title||'未命名')}</h4><p>${esc(x.body||x.caption||'')}</p></article>`).join('');document.getElementById('modal').classList.add('open')}
+function closeRoom(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeRoom()});load();
 </script>
-</body>
-</html>
+</body></html>
