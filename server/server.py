@@ -44,11 +44,6 @@ class Home(BaseModel):
     title: str
     sub: str
 
-class WorldSettings(BaseModel):
-    sound: bool = True
-    daynight: bool = True
-    motion: bool = True
-
 class MemoryEdit(BaseModel):
     title: str = ""
     caption: str = ""
@@ -132,21 +127,6 @@ def update_home(home: Home, request: Request):
     d["sub"] = home.sub
     write_data(d)
     return {"ok": True, "data": d}
-
-@app.get("/api/admin/settings")
-def admin_settings(request: Request):
-    require_admin(request)
-    d = read_data()
-    settings = d.get("settings", {})
-    return {"settings": {"sound": bool(settings.get("sound", True)), "daynight": bool(settings.get("daynight", True)), "motion": bool(settings.get("motion", True))}}
-
-@app.post("/api/admin/settings")
-def update_settings(settings: WorldSettings, request: Request):
-    require_admin(request)
-    d = read_data()
-    d["settings"] = settings.model_dump()
-    write_data(d)
-    return {"ok": True, "settings": d["settings"]}
 
 @app.get("/api/admin/memories")
 def admin_memories(request: Request):
