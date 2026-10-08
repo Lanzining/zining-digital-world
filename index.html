@@ -60,6 +60,18 @@ linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow
  .memory img{height:100%}.viewer img{max-height:66vh}
 }
 
+
+/* V10 world navigation */
+.nav-orbit{position:fixed;inset:0;z-index:35;background:radial-gradient(circle at 50% 48%,rgba(216,189,120,.07),transparent 24%),rgba(2,3,4,.72);backdrop-filter:blur(28px);display:none;align-items:center;justify-content:center;overflow:hidden}
+.nav-orbit.open{display:flex;animation:f .45s ease}
+.nav-orbit:before{content:"";position:absolute;width:min(70vw,760px);height:min(70vw,760px);border:1px solid rgba(255,255,255,.08);border-radius:50%;box-shadow:0 0 90px rgba(216,189,120,.035),inset 0 0 90px rgba(255,255,255,.025)}
+.nav-core{position:relative;z-index:2;width:min(92vw,980px);padding:32px}
+.nav-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px}.nav-ey{font-size:9px;letter-spacing:.32em;color:#7f8891}.nav-title{font-size:clamp(30px,5vw,58px);font-weight:200;letter-spacing:.04em;margin-top:8px}.nav-note{font-size:10px;color:#747d86;letter-spacing:.08em;margin-top:9px}.nav-close{background:none;border:0;color:#9aa1a8;font-size:28px;cursor:pointer;padding:4px 8px}
+.nav-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.nav-item{position:relative;min-height:112px;padding:20px 18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));color:#e9ebee;text-align:left;cursor:pointer;overflow:hidden;transition:.45s}.nav-item:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 15%,rgba(255,255,255,.08),transparent 65%);transform:translateX(-120%);transition:.8s}.nav-item:hover{transform:translateY(-4px);border-color:rgba(216,189,120,.38);box-shadow:0 18px 55px rgba(0,0,0,.4)}.nav-item:hover:before{transform:translateX(120%)}.nav-num{font-size:8px;letter-spacing:.25em;color:#6e767f}.nav-name{font-size:17px;font-weight:300;letter-spacing:.08em;margin-top:20px}.nav-cn{font-size:9px;color:#7f8891;margin-top:6px;letter-spacing:.12em}.nav-item.featured{grid-column:span 2;border-color:rgba(216,189,120,.18);background:linear-gradient(145deg,rgba(216,189,120,.09),rgba(255,255,255,.018))}.nav-item.control{border-color:rgba(255,255,255,.16)}
+.room-message{position:fixed;inset:0;z-index:45;background:rgba(2,3,4,.9);backdrop-filter:blur(26px);display:none;place-items:center;text-align:center;padding:30px}.room-message.open{display:grid;animation:f .35s}.room-card{width:min(620px,92vw);padding:52px 34px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 30px 100px rgba(0,0,0,.55)}.room-card .big{font:80px Georgia;color:rgba(216,189,120,.18)}.room-card h3{font-size:30px;font-weight:200;margin:10px 0}.room-card p{font-size:11px;color:#7f8891;line-height:2;letter-spacing:.08em}.room-back{margin-top:22px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#c6cbd0;padding:10px 22px;cursor:pointer;letter-spacing:.16em;font-size:9px}
+@media(max-width:800px){.nav-core{padding:22px}.nav-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nav-item.featured{grid-column:span 2}.nav-item{min-height:100px}.nav-name{margin-top:15px}}
+@media(max-width:520px){.nav-grid{grid-template-columns:1fr 1fr;gap:8px}.nav-item{padding:16px 13px;min-height:92px}.nav-name{font-size:14px}.nav-cn{font-size:8px}.nav-item.featured{grid-column:span 2}.nav-core{padding:16px}}
+
 @keyframes f{from{opacity:0}to{opacity:1}}
 @media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}.sheet{padding:22px}.sheet h2{font-size:32px}}
 @media(max-width:560px){.gallery{grid-template-columns:1fr}.memory,.memory img{min-height:360px}.logo{left:20px}.entry{left:20px}.sound{right:20px}}
@@ -67,9 +79,26 @@ linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow
 </head>
 <body>
 <div id="stars"></div><div class="world"><div class="ring"></div><div class="ring ring2"></div><div class="city"></div></div>
-<div class="logo" onclick="openWorld()">L<small>ZINING</small></div>
+<div class="logo" onclick="openNav()">L<small>ZINING</small></div>
 <main><div class="hero"><h1 id="title">在世界之外，留一方属于我的世界。</h1><div class="sub" id="sub">Beyond the world, I keep a world of my own.</div><div class="clock" id="clock"></div></div></main>
-<div class="entry" onclick="openWorld()">L</div><div class="sound" onclick="sound()">● AMBIENT ON</div>
+<div class="entry" onclick="openNav()">L</div><div class="sound" onclick="sound()">● AMBIENT ON</div>
+
+<div class="nav-orbit" id="navModal">
+  <div class="nav-core">
+    <div class="nav-top"><div><div class="nav-ey">L · ZINING / PRIVATE WORLD</div><div class="nav-title">进入我的世界</div><div class="nav-note">每一个入口，都是一个尚未被说完的房间。</div></div><button class="nav-close" onclick="closeNav()">×</button></div>
+    <div class="nav-grid">
+      <button class="nav-item featured" onclick="openMemory()"><div class="nav-num">01 / MEMORY</div><div class="nav-name">MEMORY</div><div class="nav-cn">记忆展厅 · 已开启</div></button>
+      <button class="nav-item" onclick="openRoom('THOUGHTS','思绪')"><div class="nav-num">02 / THOUGHTS</div><div class="nav-name">THOUGHTS</div><div class="nav-cn">文字与片段</div></button>
+      <button class="nav-item" onclick="openRoom('MOOD','情绪')"><div class="nav-num">03 / MOOD</div><div class="nav-name">MOOD</div><div class="nav-cn">情绪空间</div></button>
+      <button class="nav-item" onclick="openRoom('JOURNEY','旅程')"><div class="nav-num">04 / JOURNEY</div><div class="nav-name">JOURNEY</div><div class="nav-cn">旅行与地图</div></button>
+      <button class="nav-item" onclick="openRoom('MUSIC','音乐')"><div class="nav-num">05 / MUSIC</div><div class="nav-name">MUSIC</div><div class="nav-cn">声音档案</div></button>
+      <button class="nav-item" onclick="openRoom('COLLECTION','收藏')"><div class="nav-num">06 / COLLECTION</div><div class="nav-name">COLLECTION</div><div class="nav-cn">书 · 电影 · 艺术</div></button>
+      <button class="nav-item" onclick="openRoom('FUTURE','未来')"><div class="nav-num">07 / FUTURE</div><div class="nav-name">FUTURE</div><div class="nav-cn">计划与愿望</div></button>
+      <button class="nav-item control" onclick="location.href='/control'"><div class="nav-num">08 / CONTROL</div><div class="nav-name">L · CONTROL</div><div class="nav-cn">私人管理入口</div></button>
+    </div>
+  </div>
+</div>
+<div class="room-message" id="roomMessage"><div class="room-card"><div class="big">L</div><div class="nav-ey" id="roomEy"></div><h3 id="roomTitle"></h3><p>这个房间已经存在于世界的结构里。<br>内容正在等待你亲手留下第一件作品。</p><button class="room-back" onclick="closeRoom()">RETURN TO WORLD</button></div></div>
 
 <div class="modal" id="worldModal">
   <div class="museum">
@@ -122,8 +151,13 @@ function renderGallery(){
   </article>`).join('');
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function openWorld(){sync().then(()=>{renderGallery();document.getElementById('worldModal').classList.add('open')})}
+function openNav(){document.getElementById('navModal').classList.add('open')}
+function closeNav(){document.getElementById('navModal').classList.remove('open')}
+function openMemory(){closeNav();sync().then(()=>{renderGallery();document.getElementById('worldModal').classList.add('open')})}
+function openWorld(){openNav()}
 function closeWorld(){document.getElementById('worldModal').classList.remove('open')}
+function openRoom(code,title){closeNav();document.getElementById('roomEy').textContent='L · ZINING / '+code;document.getElementById('roomTitle').textContent=title;document.getElementById('roomMessage').classList.add('open')}
+function closeRoom(){document.getElementById('roomMessage').classList.remove('open')}
 function openViewer(i){
  const m=memories[i];
  document.getElementById('viewerImg').src=m.file;
@@ -138,7 +172,7 @@ function clock(){document.getElementById('clock').textContent=new Date().toLocal
 setInterval(clock,1000);clock();sync();
 document.addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--x',e.clientX+'px');document.documentElement.style.setProperty('--y',e.clientY+'px')});
 let ctx;function sound(){if(!ctx){ctx=new AudioContext();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=62;g.gain.value=.012;o.connect(g).connect(ctx.destination);o.start()}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeViewer();closeWorld()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeViewer();closeWorld();closeNav();closeRoom()}});
 </script>
 </body>
 </html>
