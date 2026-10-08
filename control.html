@@ -12,7 +12,7 @@
 <div class="nav" onclick="show('world',this)">世界</div>
 <div class="nav" onclick="show('security',this)">安全</div>
 </aside><main>
-<section id="dashboard"><div class="ey">CONTROL CENTER / V8</div><div class="title">真正的管理层。</div><div class="grid"><div class="card"><div class="muted">CONTENT</div><div class="big">ONLINE</div><p class="muted">首页内容可通过 API 管理。</p></div><div class="card"><div class="muted">MEMORY</div><div class="big">READY</div><p class="muted">记忆展厅已经接入上传、编辑和删除。</p></div><div class="card"><div class="muted">PRIVATE</div><div class="big">READY</div><p class="muted">支持公开 / 私人标记，私人内容不会出现在公开网站。</p></div></div></section>
+<section id="dashboard"><div class="ey">CONTROL CENTER / V12</div><div class="title">真正的管理层。</div><div class="grid"><div class="card"><div class="muted">CONTENT</div><div class="big">ONLINE</div><p class="muted">首页内容可通过 API 管理。</p></div><div class="card"><div class="muted">MEMORY</div><div class="big">READY</div><p class="muted">记忆展厅已经接入上传、编辑和删除。</p></div><div class="card"><div class="muted">PRIVATE</div><div class="big">READY</div><p class="muted">支持公开 / 私人标记，私人内容不会出现在公开网站。</p></div></div></section>
 
 <section id="home" class="hidden"><div class="ey">HOME CONTENT</div><div class="title">首页内容</div><div class="card"><label class="muted">主文案</label><input id="t"><label class="muted">英文副标题</label><input id="s"><button class="btn" style="margin-top:15px" onclick="saveHome()">保存</button></div></section>
 
@@ -29,12 +29,16 @@
 <div class="memory-list" id="memoryList"></div>
 </section>
 
-<section id="world" class="hidden"><div class="ey">WORLD ENGINE</div><div class="title">世界设置</div><div class="card"><div class="row"><span>环境声音</span><span class="tag">ACTIVE</span></div><div class="row"><span>昼夜变化</span><span class="tag">ACTIVE</span></div><div class="row"><span>空间互动</span><span class="tag">ACTIVE</span></div></div></section>
+<section id="world" class="hidden"><div class="ey">WORLD ENGINE / V12</div><div class="title">世界设置</div><div class="card"><p class="muted">这里控制前台世界引擎。ACTIVE 表示功能已启用；关闭后，前台会同步停止对应效果。</p><div class="row"><div><b>环境声音</b><div class="muted">环境声系统。浏览器仍可能要求你首次点击声音按钮。</div></div><button id="soundBtn" class="btn" onclick="toggleSetting('sound')">—</button></div><div class="row"><div><b>昼夜变化</b><div class="muted">根据真实时间改变世界光线与氛围。</div></div><button id="daynightBtn" class="btn" onclick="toggleSetting('daynight')">—</button></div><div class="row"><div><b>空间互动</b><div class="muted">鼠标 / 触摸影响光线、玻璃与空间视差。</div></div><button id="motionBtn" class="btn" onclick="toggleSetting('motion')">—</button></div></div></section>
 <section id="security" class="hidden"><div class="ey">SECURITY</div><div class="title">安全架构</div><div class="card"><p class="muted">后台使用服务器端登录会话。公开接口只返回公开记忆；私人记忆不会返回给访客。注意：当前 Render 免费文件系统仍不是永久存储，因此这一版适合先把功能跑通；真正长期保存私人照片时，再接持久化数据库与私有对象存储。</p></div></section>
 </main></div></div>
 <script>
 async function login(){const password=document.getElementById('pw').value;try{const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});if(!r.ok){alert('密码不正确');return;}openApp()}catch(e){alert('连接服务器失败')}}
-async function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');try{const r=await fetch('/api/public');const d=await r.json();document.getElementById('t').value=d.title||'';document.getElementById('s').value=d.sub||''}catch(e){}}
+async function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');try{const r=await fetch('/api/public');const d=await r.json();document.getElementById('t').value=d.title||'';document.getElementById('s').value=d.sub||'';await loadSettings()}catch(e){}}
+let worldSettings={sound:true,daynight:true,motion:true};
+async function loadSettings(){const r=await fetch('/api/admin/settings');if(!r.ok)return;const d=await r.json();worldSettings=Object.assign(worldSettings,d.settings||{});renderSettings()}
+function renderSettings(){[['sound','soundBtn'],['daynight','daynightBtn'],['motion','motionBtn']].forEach(([k,id])=>{const b=document.getElementById(id);if(!b)return;b.textContent=worldSettings[k]?'ACTIVE':'INACTIVE';b.style.borderColor=worldSettings[k]?'rgba(190,210,230,.55)':'#24282d';b.style.color=worldSettings[k]?'#eef5ff':'#747c84'});}
+async function toggleSetting(key){worldSettings[key]=!worldSettings[key];const r=await fetch('/api/admin/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(worldSettings)});if(!r.ok){worldSettings[key]=!worldSettings[key];alert('保存失败，请重新登录');return}renderSettings()}
 async function logout(){await fetch('/api/admin/logout',{method:'POST'}).catch(()=>{});location.reload()}
 function show(id,el){document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
 async function saveHome(){const d={title:document.getElementById('t').value,sub:document.getElementById('s').value};const r=await fetch('/api/admin/home',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});alert(r.ok?'已保存':'保存失败，请重新登录')}

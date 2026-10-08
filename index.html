@@ -86,7 +86,7 @@ linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow
 @keyframes f{from{opacity:0}to{opacity:1}}
 @media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}.sheet{padding:22px}.sheet h2{font-size:32px}}
 @media(max-width:560px){.gallery{grid-template-columns:1fr}.memory,.memory img{min-height:360px}.logo{left:20px}.entry{left:20px}.sound{right:20px}}
-</style>
+body{transition:background 1.5s ease,filter 1.5s ease}body[data-time="day"]{filter:brightness(1.06)}body[data-time="dawn"]{filter:brightness(.98) sepia(.04)}body[data-time="dusk"]{filter:brightness(.86) saturate(.92)}body[data-time="night"]{filter:brightness(.78)}.no-motion *, .no-motion *:before, .no-motion *:after{animation-play-state:paused!important;transition:none!important}.no-motion .nav-item:hover{transform:none!important}</style>
 </head>
 <body>
 <div id="stars"></div><div class="world"><div class="ring"></div><div class="ring ring2"></div><div class="city"></div></div>
@@ -181,8 +181,8 @@ function openViewer(i){
 function closeViewer(){document.getElementById('viewer').classList.remove('open')}
 function clock(){document.getElementById('clock').textContent=new Date().toLocaleString('zh-CN',{hour12:false}).replaceAll('/','.')}
 setInterval(clock,1000);clock();sync();
-document.addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--x',e.clientX+'px');document.documentElement.style.setProperty('--y',e.clientY+'px')});
-document.addEventListener('pointermove',e=>{document.querySelectorAll('.nav-item').forEach(el=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
+document.addEventListener('pointermove',e=>{if(!worldSettings.motion)return;document.documentElement.style.setProperty('--x',e.clientX+'px');document.documentElement.style.setProperty('--y',e.clientY+'px')});
+document.addEventListener('pointermove',e=>{if(!worldSettings.motion)return;document.querySelectorAll('.nav-item').forEach(el=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
 let ctx;function sound(){if(!ctx){ctx=new AudioContext();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=62;g.gain.value=.012;o.connect(g).connect(ctx.destination);o.start()}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeViewer();closeWorld();closeNav();closeRoom()}});
 </script>
