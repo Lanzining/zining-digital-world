@@ -6,10 +6,20 @@
 <title>L · ZINING</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;max-width:100%;overflow-x:hidden;background:#030405;color:#f1f2f4;font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}
-:root{--gold:#d8bd78;--x:50%;--y:50%}
-body{min-height:100vh;background:radial-gradient(circle at var(--x) var(--y),rgba(210,220,230,.14),transparent 20%),radial-gradient(circle at 70% 30%,rgba(105,85,170,.08),transparent 30%),#030405}
-#stars{position:fixed;inset:0;opacity:.55;pointer-events:none;background-image:radial-gradient(#fff .7px,transparent .8px);background-size:86px 86px}
-.world{position:fixed;inset:0;pointer-events:none;overflow:hidden}.ring{position:absolute;left:50%;top:52%;width:65vw;height:65vw;max-width:900px;max-height:900px;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(65deg);animation:r 30s linear infinite}.ring2{width:45vw;height:45vw;border-color:rgba(216,189,120,.12);animation-duration:20s;animation-direction:reverse}.city{position:absolute;bottom:0;left:0;right:0;height:28vh;opacity:.55;background:linear-gradient(90deg,transparent 2%,rgba(255,255,255,.09) 2.3%,transparent 2.6%) 0/8vw 100%;clip-path:polygon(0 60%,6% 60%,6% 35%,11% 35%,11% 70%,17% 70%,17% 22%,22% 22%,22% 55%,29% 55%,29% 32%,35% 32%,35% 62%,42% 62%,42% 15%,47% 15%,47% 55%,54% 55%,54% 28%,61% 28%,61% 62%,68% 62%,68% 18%,74% 18%,74% 53%,81% 53%,81% 33%,88% 33%,88% 64%,95% 64%,95% 40%,100% 40%,100% 100%,0 100%)}
+ :root{--gold:#d8bd78;--x:50vw;--y:50vh;--mx:50vw;--my:50vh;--fluid:0}
+body{min-height:100vh;background:
+radial-gradient(circle at var(--x) var(--y),rgba(235,244,255,.24),transparent 17%),
+radial-gradient(circle at 18% 24%,rgba(155,180,210,.13),transparent 30%),
+radial-gradient(circle at 78% 70%,rgba(125,105,175,.11),transparent 34%),
+linear-gradient(135deg,#0b0f14 0%,#10161d 42%,#070a0e 100%);}
+body:before{content:"";position:fixed;inset:-25%;z-index:0;pointer-events:none;background:
+radial-gradient(ellipse at 30% 35%,rgba(255,255,255,.08),transparent 22%),
+radial-gradient(ellipse at 70% 58%,rgba(170,200,230,.08),transparent 26%),
+radial-gradient(ellipse at 48% 80%,rgba(120,100,170,.07),transparent 24%);filter:blur(42px);animation:fluidDrift 18s ease-in-out infinite alternate;opacity:.9;}
+body:after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle 240px at var(--mx) var(--my),rgba(245,250,255,.12),transparent 72%),linear-gradient(115deg,transparent 35%,rgba(255,255,255,.025) 50%,transparent 65%);mix-blend-mode:screen;transition:background-position .25s ease;}
+@keyframes fluidDrift{0%{transform:translate3d(-2%,-1%,0) scale(1)}50%{transform:translate3d(3%,2%,0) scale(1.06)}100%{transform:translate3d(-1%,4%,0) scale(1.02)}}
+#stars{position:fixed;inset:0;z-index:1;opacity:.32;pointer-events:none;background-image:radial-gradient(#fff .7px,transparent .8px);background-size:86px 86px}
+.world{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;filter:blur(.1px)}.ring{position:absolute;left:50%;top:52%;width:65vw;height:65vw;max-width:900px;max-height:900px;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%) rotateX(65deg);animation:r 30s linear infinite}.ring2{width:45vw;height:45vw;border-color:rgba(216,189,120,.12);animation-duration:20s;animation-direction:reverse}.city{position:absolute;bottom:0;left:0;right:0;height:28vh;opacity:.55;background:linear-gradient(90deg,transparent 2%,rgba(255,255,255,.09) 2.3%,transparent 2.6%) 0/8vw 100%;clip-path:polygon(0 60%,6% 60%,6% 35%,11% 35%,11% 70%,17% 70%,17% 22%,22% 22%,22% 55%,29% 55%,29% 32%,35% 32%,35% 62%,42% 62%,42% 15%,47% 15%,47% 55%,54% 55%,54% 28%,61% 28%,61% 62%,68% 62%,68% 18%,74% 18%,74% 53%,81% 53%,81% 33%,88% 33%,88% 64%,95% 64%,95% 40%,100% 40%,100% 100%,0 100%)}
 @keyframes r{to{transform:translate(-50%,-50%) rotateX(65deg) rotateZ(360deg)}}
 main{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative;z-index:2}.hero{transform:translateY(-5vh)}h1{font-size:clamp(28px,4.2vw,62px);font-weight:300;letter-spacing:.1em;margin:0 0 18px}.sub{font-size:11px;letter-spacing:.32em;color:#9ca4ad}.clock{margin-top:32px;font-size:9px;letter-spacing:.3em;color:#737b84}
 .logo{position:fixed;z-index:5;top:27px;left:30px;font:25px Georgia;cursor:pointer}.logo small{font:9px Inter;letter-spacing:.35em;color:#8f969e;margin-left:8px}.entry{position:fixed;z-index:5;left:27px;bottom:27px;width:50px;height:50px;border:1px solid rgba(255,255,255,.18);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.035);backdrop-filter:blur(18px);cursor:pointer}.sound{position:fixed;right:28px;bottom:30px;z-index:5;font-size:9px;letter-spacing:.2em;color:#89919a;cursor:pointer}
@@ -61,6 +71,14 @@ linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow
 }
 
 
+/* V13 LIQUID FROST ATMOSPHERE */
+.frost-flow{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.8}
+.frost-flow:before,.frost-flow:after{content:"";position:absolute;border-radius:50%;filter:blur(70px);mix-blend-mode:screen}
+.frost-flow:before{width:48vw;height:34vw;left:-8vw;top:18vh;background:radial-gradient(ellipse,rgba(185,210,235,.13),transparent 68%);animation:frostA 22s ease-in-out infinite alternate}
+.frost-flow:after{width:44vw;height:38vw;right:-8vw;bottom:8vh;background:radial-gradient(ellipse,rgba(150,125,205,.11),transparent 68%);animation:frostB 26s ease-in-out infinite alternate}
+@keyframes frostA{to{transform:translate(15vw,7vh) scale(1.15) rotate(8deg)}}
+@keyframes frostB{to{transform:translate(-12vw,-9vh) scale(1.12) rotate(-7deg)}}
+
 /* V11 L CORE / LIQUID GLASS NAVIGATION */
 .nav-orbit{position:fixed;inset:0;z-index:35;background:radial-gradient(circle at 50% 48%,rgba(205,225,255,.075),transparent 24%),radial-gradient(circle at 18% 20%,rgba(255,255,255,.035),transparent 30%),rgba(2,3,5,.68);backdrop-filter:blur(34px) saturate(125%);display:none;align-items:center;justify-content:center;overflow:hidden;isolation:isolate}
 .nav-orbit.open{display:flex;animation:coreIn .7s cubic-bezier(.16,1,.3,1)}
@@ -89,7 +107,7 @@ linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow
 body{transition:background 1.5s ease,filter 1.5s ease}body[data-time="day"]{filter:brightness(1.06)}body[data-time="dawn"]{filter:brightness(.98) sepia(.04)}body[data-time="dusk"]{filter:brightness(.86) saturate(.92)}body[data-time="night"]{filter:brightness(.78)}.no-motion *, .no-motion *:before, .no-motion *:after{animation-play-state:paused!important;transition:none!important}.no-motion .nav-item:hover{transform:none!important}</style>
 </head>
 <body>
-<div id="stars"></div><div class="world"><div class="ring"></div><div class="ring ring2"></div><div class="city"></div></div>
+<div id="stars"></div><div class="frost-flow"></div><div class="world"><div class="ring"></div><div class="ring ring2"></div><div class="city"></div></div>
 <div class="logo" onclick="openNav()">L<small>ZINING</small></div>
 <main><div class="hero"><h1 id="title">在世界之外，留一方属于我的世界。</h1><div class="sub" id="sub">Beyond the world, I keep a world of my own.</div><div class="clock" id="clock"></div></div></main>
 <div class="entry" onclick="openNav()">L</div><div class="sound" onclick="sound()">● AMBIENT ON</div>
@@ -180,10 +198,21 @@ function openViewer(i){
 }
 function closeViewer(){document.getElementById('viewer').classList.remove('open')}
 function clock(){document.getElementById('clock').textContent=new Date().toLocaleString('zh-CN',{hour12:false}).replaceAll('/','.')}
-setInterval(clock,1000);clock();sync();
-document.addEventListener('pointermove',e=>{if(!worldSettings.motion)return;document.documentElement.style.setProperty('--x',e.clientX+'px');document.documentElement.style.setProperty('--y',e.clientY+'px')});
-document.addEventListener('pointermove',e=>{if(!worldSettings.motion)return;document.querySelectorAll('.nav-item').forEach(el=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
-let ctx;function sound(){if(!ctx){ctx=new AudioContext();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=62;g.gain.value=.012;o.connect(g).connect(ctx.destination);o.start()}}
+let worldSettings={sound:true,daynight:true,motion:true};
+function applyWorldSettings(){
+ document.body.classList.toggle('no-motion',!worldSettings.motion);
+ const now=new Date(), h=now.getHours()+now.getMinutes()/60;
+ let phase='night';
+ if(h>=6&&h<9) phase='dawn'; else if(h>=9&&h<17) phase='day'; else if(h>=17&&h<20) phase='dusk';
+ if(!worldSettings.daynight) phase='night';
+ document.body.dataset.time=phase;
+ const soundEl=document.querySelector('.sound'); if(soundEl) soundEl.textContent=worldSettings.sound?'● AMBIENT ON':'○ AMBIENT OFF';
+}
+async function loadWorldSettings(){try{const r=await fetch('/api/public');if(r.ok){const d=await r.json();worldSettings={...worldSettings,...(d.settings||{})};}}catch(e){}applyWorldSettings();}
+setInterval(()=>{if(worldSettings.daynight)applyWorldSettings()},30000);
+setInterval(clock,1000);clock();sync();loadWorldSettings();
+document.addEventListener('pointermove',e=>{if(!worldSettings.motion)return;document.documentElement.style.setProperty('--x',e.clientX+'px');document.documentElement.style.setProperty('--y',e.clientY+'px');document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');document.querySelectorAll('.nav-item').forEach(el=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
+let ctx;function sound(){if(!worldSettings.sound)return;if(!ctx){ctx=new AudioContext();let o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=62;g.gain.value=.012;o.connect(g).connect(ctx.destination);o.start();setTimeout(()=>{g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+1.8)},50)}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeViewer();closeWorld();closeNav();closeRoom()}});
 </script>
 </body>
