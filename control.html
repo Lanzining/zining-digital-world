@@ -1,0 +1,50 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>L · CONTROL</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050607;color:#eee;font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}.top{height:70px;border-bottom:1px solid #17191c;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;background:rgba(5,6,7,.85);backdrop-filter:blur(20px);z-index:3}.logo{font:24px Georgia}.logo small{font:9px Inter;letter-spacing:.3em;color:#858d96;margin-left:8px}.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 70px)}aside{border-right:1px solid #17191c;padding:18px}.nav{padding:13px;border-radius:10px;color:#8f979f;font-size:11px;cursor:pointer}.nav.active,.nav:hover{background:#111315;color:#fff}main{padding:38px;max-width:1100px;width:100%}.ey{font-size:9px;letter-spacing:.3em;color:#808890}.title{font-size:39px;font-weight:300;margin:10px 0 30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid #191c20;background:#0b0d0f;border-radius:17px;padding:20px}.muted{color:#818a93;font-size:11px;line-height:1.9}.big{font-size:30px;font-weight:300}input,textarea{width:100%;background:#060708;border:1px solid #1b1e22;color:#eee;border-radius:11px;padding:12px;margin-top:8px}textarea{min-height:120px}.btn{border:1px solid #24282d;background:#0d1012;color:#eee;border-radius:999px;padding:10px 15px;font-size:10px;cursor:pointer}.row{padding:15px 0;border-bottom:1px solid #191c20;display:flex;justify-content:space-between}.hidden{display:none!important}.login{height:100vh;display:grid;place-items:center}.box{width:min(400px,90%);padding:32px;border:1px solid #1b1e22;border-radius:22px;background:#0b0d0f;text-align:center}.L{font:65px Georgia}.notice{font-size:10px;color:#858d96;line-height:1.8}@media(max-width:750px){.layout{grid-template-columns:1fr}aside{display:flex;overflow:auto}.grid{grid-template-columns:1fr}main{padding:24px 18px}}
+</style></head><body>
+<div id="login" class="login"><div class="box"><div class="L">L</div><h2 style="font-weight:300">L · CONTROL</h2><p class="notice">L · CONTROL<br>服务器安全登录</p><input id="pw" type="password" placeholder="管理密码"><button class="btn" style="width:100%;margin-top:13px" onclick="login()">进入</button></div></div>
+<div id="app" class="hidden"><header class="top"><div class="logo">L<small>ZINING CONTROL</small></div><button class="btn" onclick="logout()">退出</button></header><div class="layout"><aside><div class="nav active" onclick="show('dashboard',this)">概览</div><div class="nav" onclick="show('home',this)">首页</div><div class="nav" onclick="show('world',this)">世界</div><div class="nav" onclick="show('security',this)">安全</div></aside><main>
+<section id="dashboard"><div class="ey">CONTROL CENTER / V5</div><div class="title">真正的管理层。</div><div class="grid"><div class="card"><div class="muted">CONTENT</div><div class="big">API READY</div><p class="muted">前后台已经按 API 思路分离。</p></div><div class="card"><div class="muted">DATABASE</div><div class="big">READY</div><p class="muted">预留数据库层。</p></div><div class="card"><div class="muted">MEDIA</div><div class="big">READY</div><p class="muted">预留私有图片存储。</p></div></div></section>
+<section id="home" class="hidden"><div class="ey">HOME CONTENT</div><div class="title">首页内容</div><div class="card"><label class="muted">主文案</label><input id="t"><label class="muted">英文副标题</label><input id="s"><button class="btn" style="margin-top:15px" onclick="saveHome()">保存</button></div></section>
+<section id="world" class="hidden"><div class="ey">WORLD ENGINE</div><div class="title">世界设置</div><div class="card"><div class="row"><span>环境声音</span><button class="btn">ON</button></div><div class="row"><span>昼夜变化</span><button class="btn">ON</button></div><div class="row"><span>空间互动</span><button class="btn">ON</button></div></div></section>
+<section id="security" class="hidden"><div class="ey">SECURITY</div><div class="title">安全架构</div><div class="card"><p class="muted">V5 已明确拆分：前台 / 管理后台 / API / 数据库 / 媒体存储。当前 ZIP 仍是可运行原型；要获得真正安全的私人网站，需要部署服务器端认证和数据库权限。</p></div></section>
+</main></div></div>
+<script>
+async function login(){
+  const password=document.getElementById('pw').value;
+  try{
+    const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});
+    if(!r.ok){alert('密码不正确');return;}
+    openApp();
+  }catch(e){alert('连接服务器失败');}
+}
+async function openApp(){
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  try{
+    const r=await fetch('/api/public');
+    const d=await r.json();
+    document.getElementById('t').value=d.title||'';
+    document.getElementById('s').value=d.sub||'';
+  }catch(e){}
+}
+async function logout(){
+  await fetch('/api/admin/logout',{method:'POST'}).catch(()=>{});
+  location.reload();
+}
+function show(id,el){
+  document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+}
+async function saveHome(){
+  const d={title:document.getElementById('t').value,sub:document.getElementById('s').value};
+  const r=await fetch('/api/admin/home',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+  if(r.ok) alert('已保存'); else alert('保存失败，请重新登录');
+}
+(async()=>{
+  const r=await fetch('/api/admin/me').catch(()=>null);
+  if(r && r.ok){const d=await r.json(); if(d.authenticated) openApp();}
+})();
+</script></body></html>
