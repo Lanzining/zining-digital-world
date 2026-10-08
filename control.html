@@ -1,50 +1,48 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>L · CONTROL</title>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>L · CONTROL</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#050607;color:#eee;font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}.top{height:70px;border-bottom:1px solid #17191c;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;background:rgba(5,6,7,.85);backdrop-filter:blur(20px);z-index:3}.logo{font:24px Georgia}.logo small{font:9px Inter;letter-spacing:.3em;color:#858d96;margin-left:8px}.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 70px)}aside{border-right:1px solid #17191c;padding:18px}.nav{padding:13px;border-radius:10px;color:#8f979f;font-size:11px;cursor:pointer}.nav.active,.nav:hover{background:#111315;color:#fff}main{padding:38px;max-width:1100px;width:100%}.ey{font-size:9px;letter-spacing:.3em;color:#808890}.title{font-size:39px;font-weight:300;margin:10px 0 30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid #191c20;background:#0b0d0f;border-radius:17px;padding:20px}.muted{color:#818a93;font-size:11px;line-height:1.9}.big{font-size:30px;font-weight:300}input,textarea{width:100%;background:#060708;border:1px solid #1b1e22;color:#eee;border-radius:11px;padding:12px;margin-top:8px}textarea{min-height:120px}.btn{border:1px solid #24282d;background:#0d1012;color:#eee;border-radius:999px;padding:10px 15px;font-size:10px;cursor:pointer}.row{padding:15px 0;border-bottom:1px solid #191c20;display:flex;justify-content:space-between}.hidden{display:none!important}.login{height:100vh;display:grid;place-items:center}.box{width:min(400px,90%);padding:32px;border:1px solid #1b1e22;border-radius:22px;background:#0b0d0f;text-align:center}.L{font:65px Georgia}.notice{font-size:10px;color:#858d96;line-height:1.8}@media(max-width:750px){.layout{grid-template-columns:1fr}aside{display:flex;overflow:auto}.grid{grid-template-columns:1fr}main{padding:24px 18px}}
+*{box-sizing:border-box}body{margin:0;background:#050607;color:#eee;font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif}.top{height:70px;border-bottom:1px solid #17191c;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;background:rgba(5,6,7,.85);backdrop-filter:blur(20px);z-index:3}.logo{font:24px Georgia}.logo small{font:9px Inter;letter-spacing:.3em;color:#858d96;margin-left:8px}.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 70px)}aside{border-right:1px solid #17191c;padding:18px}.nav{padding:13px;border-radius:10px;color:#8f979f;font-size:11px;cursor:pointer}.nav.active,.nav:hover{background:#111315;color:#fff}main{padding:38px;max-width:1180px;width:100%}.ey{font-size:9px;letter-spacing:.3em;color:#808890}.title{font-size:39px;font-weight:300;margin:10px 0 30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid #191c20;background:#0b0d0f;border-radius:17px;padding:20px}.muted{color:#818a93;font-size:11px;line-height:1.9}.big{font-size:30px;font-weight:300}input,textarea,select{width:100%;background:#060708;border:1px solid #1b1e22;color:#eee;border-radius:11px;padding:12px;margin-top:8px}textarea{min-height:90px}.btn{border:1px solid #24282d;background:#0d1012;color:#eee;border-radius:999px;padding:10px 15px;font-size:10px;cursor:pointer}.btn:hover{border-color:#777}.row{padding:15px 0;border-bottom:1px solid #191c20;display:flex;justify-content:space-between;gap:15px}.hidden{display:none!important}.login{height:100vh;display:grid;place-items:center}.box{width:min(400px,90%);padding:32px;border:1px solid #1b1e22;border-radius:22px;background:#0b0d0f;text-align:center}.L{font:65px Georgia}.notice{font-size:10px;color:#858d96;line-height:1.8}.upload{display:grid;grid-template-columns:1fr 1fr;gap:14px}.upload .full{grid-column:1/-1}.memory-list{margin-top:22px}.memory-item{display:grid;grid-template-columns:130px 1fr auto;gap:18px;align-items:center;padding:15px 0;border-bottom:1px solid #191c20}.thumb{width:130px;height:90px;border-radius:12px;object-fit:cover;background:#111}.memory-title{font-size:14px}.tag{display:inline-block;font-size:9px;letter-spacing:.12em;border:1px solid #333;padding:5px 8px;border-radius:999px;margin-top:7px;color:#9ba3ab}.actions{display:flex;gap:8px;flex-wrap:wrap}.danger{border-color:#4b2b2b;color:#d7aaaa}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{display:flex;overflow:auto}.grid{grid-template-columns:1fr}.upload{grid-template-columns:1fr}.upload .full{grid-column:auto}.memory-item{grid-template-columns:90px 1fr}.thumb{width:90px;height:70px}.memory-item .actions{grid-column:1/-1}main{padding:24px 18px}}
 </style></head><body>
 <div id="login" class="login"><div class="box"><div class="L">L</div><h2 style="font-weight:300">L · CONTROL</h2><p class="notice">L · CONTROL<br>服务器安全登录</p><input id="pw" type="password" placeholder="管理密码"><button class="btn" style="width:100%;margin-top:13px" onclick="login()">进入</button></div></div>
-<div id="app" class="hidden"><header class="top"><div class="logo">L<small>ZINING CONTROL</small></div><button class="btn" onclick="logout()">退出</button></header><div class="layout"><aside><div class="nav active" onclick="show('dashboard',this)">概览</div><div class="nav" onclick="show('home',this)">首页</div><div class="nav" onclick="show('world',this)">世界</div><div class="nav" onclick="show('security',this)">安全</div></aside><main>
-<section id="dashboard"><div class="ey">CONTROL CENTER / V5</div><div class="title">真正的管理层。</div><div class="grid"><div class="card"><div class="muted">CONTENT</div><div class="big">API READY</div><p class="muted">前后台已经按 API 思路分离。</p></div><div class="card"><div class="muted">DATABASE</div><div class="big">READY</div><p class="muted">预留数据库层。</p></div><div class="card"><div class="muted">MEDIA</div><div class="big">READY</div><p class="muted">预留私有图片存储。</p></div></div></section>
+<div id="app" class="hidden"><header class="top"><div class="logo">L<small>ZINING CONTROL</small></div><button class="btn" onclick="logout()">退出</button></header>
+<div class="layout"><aside>
+<div class="nav active" onclick="show('dashboard',this)">概览</div>
+<div class="nav" onclick="show('home',this)">首页</div>
+<div class="nav" onclick="show('memories',this);loadMemories()">记忆展厅</div>
+<div class="nav" onclick="show('world',this)">世界</div>
+<div class="nav" onclick="show('security',this)">安全</div>
+</aside><main>
+<section id="dashboard"><div class="ey">CONTROL CENTER / V7</div><div class="title">真正的管理层。</div><div class="grid"><div class="card"><div class="muted">CONTENT</div><div class="big">ONLINE</div><p class="muted">首页内容可通过 API 管理。</p></div><div class="card"><div class="muted">MEMORY</div><div class="big">READY</div><p class="muted">记忆展厅已经接入上传、编辑和删除。</p></div><div class="card"><div class="muted">PRIVATE</div><div class="big">READY</div><p class="muted">支持公开 / 私人标记，私人内容不会出现在公开网站。</p></div></div></section>
+
 <section id="home" class="hidden"><div class="ey">HOME CONTENT</div><div class="title">首页内容</div><div class="card"><label class="muted">主文案</label><input id="t"><label class="muted">英文副标题</label><input id="s"><button class="btn" style="margin-top:15px" onclick="saveHome()">保存</button></div></section>
-<section id="world" class="hidden"><div class="ey">WORLD ENGINE</div><div class="title">世界设置</div><div class="card"><div class="row"><span>环境声音</span><button class="btn">ON</button></div><div class="row"><span>昼夜变化</span><button class="btn">ON</button></div><div class="row"><span>空间互动</span><button class="btn">ON</button></div></div></section>
-<section id="security" class="hidden"><div class="ey">SECURITY</div><div class="title">安全架构</div><div class="card"><p class="muted">V5 已明确拆分：前台 / 管理后台 / API / 数据库 / 媒体存储。当前 ZIP 仍是可运行原型；要获得真正安全的私人网站，需要部署服务器端认证和数据库权限。</p></div></section>
+
+<section id="memories" class="hidden"><div class="ey">MEMORY EXHIBITION</div><div class="title">记忆展厅</div>
+<div class="card"><p class="muted">把照片作为作品保存。公开作品会出现在网站的「记忆展厅」；私人作品只在这里可见。</p>
+<div class="upload">
+<div class="full"><label class="muted">选择照片</label><input id="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></div>
+<div><label class="muted">作品名称</label><input id="mt" placeholder="例如：东京 · 雨夜"></div>
+<div><label class="muted">日期</label><input id="md" type="date"></div>
+<div class="full"><label class="muted">一句话 / 记忆片段</label><textarea id="mc" placeholder="留下这一刻的文字……"></textarea></div>
+<div><label class="muted">可见范围</label><select id="mv"><option value="public">公开 · 所有人可见</option><option value="private">私人 · 仅 L · CONTROL 可见</option></select></div>
+<div style="display:flex;align-items:end"><button class="btn" onclick="uploadMemory()">上传为一件作品</button></div>
+</div></div>
+<div class="memory-list" id="memoryList"></div>
+</section>
+
+<section id="world" class="hidden"><div class="ey">WORLD ENGINE</div><div class="title">世界设置</div><div class="card"><div class="row"><span>环境声音</span><span class="tag">ACTIVE</span></div><div class="row"><span>昼夜变化</span><span class="tag">ACTIVE</span></div><div class="row"><span>空间互动</span><span class="tag">ACTIVE</span></div></div></section>
+<section id="security" class="hidden"><div class="ey">SECURITY</div><div class="title">安全架构</div><div class="card"><p class="muted">后台使用服务器端登录会话。公开接口只返回公开记忆；私人记忆不会返回给访客。注意：当前 Render 免费文件系统仍不是永久存储，因此这一版适合先把功能跑通；真正长期保存私人照片时，再接持久化数据库与私有对象存储。</p></div></section>
 </main></div></div>
 <script>
-async function login(){
-  const password=document.getElementById('pw').value;
-  try{
-    const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});
-    if(!r.ok){alert('密码不正确');return;}
-    openApp();
-  }catch(e){alert('连接服务器失败');}
-}
-async function openApp(){
-  document.getElementById('login').classList.add('hidden');
-  document.getElementById('app').classList.remove('hidden');
-  try{
-    const r=await fetch('/api/public');
-    const d=await r.json();
-    document.getElementById('t').value=d.title||'';
-    document.getElementById('s').value=d.sub||'';
-  }catch(e){}
-}
-async function logout(){
-  await fetch('/api/admin/logout',{method:'POST'}).catch(()=>{});
-  location.reload();
-}
-function show(id,el){
-  document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
-  el.classList.add('active');
-}
-async function saveHome(){
-  const d={title:document.getElementById('t').value,sub:document.getElementById('s').value};
-  const r=await fetch('/api/admin/home',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
-  if(r.ok) alert('已保存'); else alert('保存失败，请重新登录');
-}
-(async()=>{
-  const r=await fetch('/api/admin/me').catch(()=>null);
-  if(r && r.ok){const d=await r.json(); if(d.authenticated) openApp();}
-})();
+async function login(){const password=document.getElementById('pw').value;try{const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});if(!r.ok){alert('密码不正确');return;}openApp()}catch(e){alert('连接服务器失败')}}
+async function openApp(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');try{const r=await fetch('/api/public');const d=await r.json();document.getElementById('t').value=d.title||'';document.getElementById('s').value=d.sub||''}catch(e){}}
+async function logout(){await fetch('/api/admin/logout',{method:'POST'}).catch(()=>{});location.reload()}
+function show(id,el){document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));el.classList.add('active')}
+async function saveHome(){const d={title:document.getElementById('t').value,sub:document.getElementById('s').value};const r=await fetch('/api/admin/home',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});alert(r.ok?'已保存':'保存失败，请重新登录')}
+async function loadMemories(){const r=await fetch('/api/admin/memories');if(!r.ok){alert('登录已失效，请重新登录');return}const d=await r.json();renderMemories(d.memories||[])}
+function renderMemories(ms){const el=document.getElementById('memoryList');if(!ms.length){el.innerHTML='<div class="card muted">还没有作品。上传你的第一张照片吧。</div>';return}el.innerHTML=ms.map(m=>`<div class="memory-item"><img class="thumb" src="${m.file}"><div><div class="memory-title">${esc(m.title)}</div><div class="muted">${esc(m.date||'')}${m.caption?' · '+esc(m.caption):''}</div><span class="tag">${m.visibility==='private'?'PRIVATE · 私人':'PUBLIC · 公开'}</span></div><div class="actions"><button class="btn" onclick="editMemory('${m.id}',${JSON.stringify(m.title||'')},${JSON.stringify(m.caption||'')},${JSON.stringify(m.date||'')},'${m.visibility}')">编辑</button><button class="btn danger" onclick="deleteMemory('${m.id}')">删除</button></div></div>`).join('')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function uploadMemory(){const file=document.getElementById('image').files[0];if(!file){alert('先选择一张照片');return}const fd=new FormData();fd.append('image',file);fd.append('title',document.getElementById('mt').value);fd.append('caption',document.getElementById('mc').value);fd.append('date',document.getElementById('md').value);fd.append('visibility',document.getElementById('mv').value);const r=await fetch('/api/admin/memories',{method:'POST',body:fd});if(!r.ok){let x=await r.json().catch(()=>({}));alert(x.detail||'上传失败');return}document.getElementById('image').value='';document.getElementById('mt').value='';document.getElementById('mc').value='';await loadMemories();alert('作品已进入记忆展厅')}
+async function editMemory(id,title,caption,date,visibility){const nt=prompt('作品名称',title);if(nt===null)return;const nc=prompt('记忆片段',caption);if(nc===null)return;const nd=prompt('日期（YYYY-MM-DD）',date);if(nd===null)return;const nv=confirm('确定设为私人吗？确定=私人，取消=公开')?'private':'public';const r=await fetch('/api/admin/memories/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:nt,caption:nc,date:nd,visibility:nv})});if(r.ok)loadMemories();else alert('保存失败')}
+async function deleteMemory(id){if(!confirm('确定删除这件作品？删除后照片也会被移除。'))return;const r=await fetch('/api/admin/memories/'+id,{method:'DELETE'});if(r.ok)loadMemories();else alert('删除失败')}
+(async()=>{const r=await fetch('/api/admin/me').catch(()=>null);if(r&&r.ok){const d=await r.json();if(d.authenticated)openApp()}})();
 </script></body></html>

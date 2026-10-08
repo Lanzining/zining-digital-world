@@ -1,12 +1,7 @@
 services:
   - type: web
     name: zining-digital-world
-    runtime: python
+    env: python
     plan: free
     buildCommand: pip install -r server/requirements.txt
     startCommand: uvicorn server.server:app --host 0.0.0.0 --port $PORT
-    envVars:
-      - key: ADMIN_PASSWORD
-        sync: false
-      - key: SESSION_SECRET
-        generateValue: true

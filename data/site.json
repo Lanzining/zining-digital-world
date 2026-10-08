@@ -6,5 +6,6 @@
     "sound": true,
     "daynight": true,
     "motion": true
-  }
+  },
+  "memories": []
 }
