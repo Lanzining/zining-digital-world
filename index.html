@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#dce5ec">
-<title>L · ZINING</title>
+<title>L · 梓宁的数字世界</title>
 <style>
 :root{
   --ink:#10161d;--soft:#eef3f6;--glass:rgba(245,249,252,.18);
@@ -38,8 +38,8 @@ background:
 radial-gradient(30vw 18vw at 35% 55%,rgba(255,255,255,.09),transparent 72%),
 radial-gradient(25vw 20vw at 72% 62%,rgba(177,201,223,.10),transparent 72%);
 filter:blur(28px);opacity:.9;transform:translate(calc((var(--mx) - 50vw)*-.012),calc((var(--my) - 50vh)*-.012));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-#halo{position:absolute;left:50%;top:50%;width:min(68vw,920px);height:min(68vw,920px);transform:translate(-50%,-50%);
-border-radius:50%;border:1px solid rgba(255,255,255,.10);box-shadow:0 0 90px rgba(205,225,240,.06),inset 0 0 90px rgba(255,255,255,.035);opacity:.8}
+#halo{position:absolute;left:50%;top:50%;width:52vw;height:52vw;max-width:760px;max-height:760px;transform:translate(-50%,-50%);
+border-radius:50%;background:radial-gradient(circle,rgba(221,235,244,.055),transparent 58%);filter:blur(18px);opacity:.55}
 #architecture{position:absolute;inset:0;opacity:.28;transform:translate(calc((var(--mx) - 50vw)*-.006),calc((var(--my) - 50vh)*-.004));transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 #architecture i{position:absolute;display:block;border:1px solid rgba(218,231,240,.16);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0));box-shadow:0 30px 90px rgba(0,0,0,.12)}
 .a1{width:45vw;height:22vh;left:8vw;bottom:8vh;transform:perspective(900px) rotateY(20deg) skewY(-3deg)}
@@ -48,7 +48,7 @@ border-radius:50%;border:1px solid rgba(255,255,255,.10);box-shadow:0 0 90px rgb
 .topbar{position:absolute;z-index:20;left:0;right:0;top:0;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
 .brand{font-size:11px;letter-spacing:.28em;opacity:.78}.status{font-size:9px;letter-spacing:.24em;text-transform:uppercase;opacity:.42}
 .core{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,280px);height:min(22vw,280px);min-width:180px;min-height:180px;
-display:grid;place-items:center;border-radius:50%;cursor:pointer;transition:transform 1.2s cubic-bezier(.16,1,.3,1),filter .8s}
+display:grid;place-items:center;border-radius:28px;cursor:pointer;transition:transform 1.1s cubic-bezier(.16,1,.3,1),filter .8s;outline:none}
 .core:before{content:"";position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.58),rgba(220,233,242,.12) 36%,transparent 69%);filter:blur(10px);opacity:.75}
 .core:after{content:"";position:absolute;inset:7%;border-radius:50%;border:1px solid rgba(255,255,255,.26);box-shadow:0 0 80px rgba(220,236,246,.13),inset 0 0 50px rgba(255,255,255,.05)}
 .core:hover{transform:translate(-50%,-50%) scale(1.035);filter:brightness(1.08)}
@@ -68,7 +68,9 @@ transform:translate3d(0,0,0) rotate(var(--r));transition:transform .65s cubic-be
 .o1{left:10%;top:22%;--r:-5deg}.o2{right:10%;top:20%;--r:5deg}.o3{left:18%;top:66%;--r:4deg}.o4{right:16%;top:66%;--r:-4deg}
 .o5{left:50%;top:12%;transform:translateX(-50%) rotate(-2deg)}.o6{left:50%;bottom:9%;transform:translateX(-50%) rotate(2deg)}
 .o7{left:5%;top:47%;--r:-3deg}.o8{right:5%;top:46%;--r:3deg}
-.open .core{transform:translate(-50%,-50%) scale(.72);filter:brightness(.88);opacity:.65}
+.open .core{transform:translate(-50%,-50%) scale(.58);filter:brightness(.86);opacity:.52}
+.open .logo{animation:logoEnter 1.15s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes logoEnter{0%{transform:scale(1);letter-spacing:-.12em;filter:brightness(1)}45%{transform:scale(1.22);letter-spacing:-.2em;filter:brightness(1.6)}100%{transform:scale(.82);letter-spacing:-.05em;filter:brightness(.72)}}
 .scrim{position:absolute;z-index:5;inset:0;background:radial-gradient(circle at center,transparent 0,rgba(8,12,17,.03) 30%,rgba(8,12,17,.34) 100%);pointer-events:none}
 #room{position:fixed;z-index:40;inset:0;background:rgba(10,15,20,.36);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);opacity:0;pointer-events:none;transform:scale(1.03);transition:opacity .65s,transform .8s cubic-bezier(.16,1,.3,1)}
 #room.show{opacity:1;pointer-events:auto;transform:scale(1)}
@@ -86,7 +88,7 @@ transform:translate3d(0,0,0) rotate(var(--r));transition:transform .65s cubic-be
 .open .hint{opacity:0}
 @media(max-width:760px){
   .topbar{padding:20px}.status{display:none}
-  #halo{width:100vw;height:100vw}
+  #halo{width:100vw;height:100vw;opacity:.42}
   .core{min-width:150px;min-height:150px;width:42vw;height:42vw}
   .object{width:142px;height:92px;border-radius:24px}
   .o1{left:3%;top:17%}.o2{right:3%;top:17%}.o3{left:4%;top:70%}.o4{right:4%;top:70%}
@@ -103,29 +105,29 @@ transform:translate3d(0,0,0) rotate(var(--r));transition:transform .65s cubic-be
   <div id="frost"></div><div id="halo"></div>
   <div id="architecture"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="scrim"></div>
-  <header class="topbar"><div class="brand">L · ZINING</div><div class="status" id="status">PRIVATE DIGITAL WORLD</div></header>
+  <header class="topbar"><div class="brand">L · 梓宁</div><div class="status" id="status">私人数字世界</div></header>
 
   <main>
     <button class="core" id="core" aria-label="Enter L · ZINING">
-      <span class="logo">L</span><span class="core-caption">ENTER THE WORLD</span>
+      <span class="logo">L</span><span class="core-caption">进入我的世界</span>
     </button>
     <div class="objects" id="objects">
-      <button class="object o1" data-room="MEMORY"><span class="obj-inner"><span class="num">01</span><span class="name">MEMORY</span><span class="desc">PRIVATE ARCHIVE</span></span></button>
-      <button class="object o2" data-room="THOUGHTS"><span class="obj-inner"><span class="num">02</span><span class="name">THOUGHTS</span><span class="desc">FRAGMENTS</span></span></button>
-      <button class="object o3" data-room="MOOD"><span class="obj-inner"><span class="num">03</span><span class="name">MOOD</span><span class="desc">INNER WEATHER</span></span></button>
-      <button class="object o4" data-room="JOURNEY"><span class="obj-inner"><span class="num">04</span><span class="name">JOURNEY</span><span class="desc">PLACES & TIME</span></span></button>
-      <button class="object o5" data-room="MUSIC"><span class="obj-inner"><span class="num">05</span><span class="name">MUSIC</span><span class="desc">SOUND SPACE</span></span></button>
-      <button class="object o6" data-room="FUTURE"><span class="obj-inner"><span class="num">06</span><span class="name">FUTURE</span><span class="desc">NEXT HORIZON</span></span></button>
-      <button class="object o7" data-room="COLLECTION"><span class="obj-inner"><span class="num">07</span><span class="name">COLLECTION</span><span class="desc">OBJECTS & ART</span></span></button>
-      <button class="object o8" data-room="CONTROL"><span class="obj-inner"><span class="num">08</span><span class="name">L · CONTROL</span><span class="desc">WORLD ENGINE</span></span></button>
+      <button class="object o1" data-room="记忆"><span class="obj-inner"><span class="num">01</span><span class="name">记忆</span><span class="desc">私人记忆档案</span></span></button>
+      <button class="object o2" data-room="思绪"><span class="obj-inner"><span class="num">02</span><span class="name">思绪</span><span class="desc">思想碎片</span></span></button>
+      <button class="object o3" data-room="心境"><span class="obj-inner"><span class="num">03</span><span class="name">心境</span><span class="desc">内在天气</span></span></button>
+      <button class="object o4" data-room="旅途"><span class="obj-inner"><span class="num">04</span><span class="name">旅途</span><span class="desc">旅途与时间</span></span></button>
+      <button class="object o5" data-room="音乐"><span class="obj-inner"><span class="num">05</span><span class="name">音乐</span><span class="desc">声音空间</span></span></button>
+      <button class="object o6" data-room="未来"><span class="obj-inner"><span class="num">06</span><span class="name">未来</span><span class="desc">未来边界</span></span></button>
+      <button class="object o7" data-room="收藏"><span class="obj-inner"><span class="num">07</span><span class="name">收藏</span><span class="desc">收藏与艺术</span></span></button>
+      <button class="object o8" data-room="CONTROL"><span class="obj-inner"><span class="num">08</span><span class="name">L · 控制</span><span class="desc">世界引擎</span></span></button>
     </div>
-    <div class="hint">MOVE THROUGH LIGHT · CLICK L TO ENTER</div>
+    <div class="hint">移动光标感受空间 · 点击 L 进入</div>
   </main>
 </div>
 
 <section id="room" aria-hidden="true">
   <div class="room-card">
-    <div class="room-head"><div><div class="room-title" id="roomTitle">MEMORY</div><div class="room-sub" id="roomSub">PRIVATE ARCHIVE</div></div><button class="close" id="close">CLOSE</button></div>
+    <div class="room-head"><div><div class="room-title" id="roomTitle">记忆</div><div class="room-sub" id="roomSub">私人记忆档案</div></div><button class="close" id="close">关闭</button></div>
     <div class="gallery" id="gallery"></div>
   </div>
 </section>
@@ -158,18 +160,18 @@ async function load(){
   try{
     const r=await fetch('/api/public',{cache:'no-store'}); const d=await r.json();
     memories=d.memories||[];
-    if(d.title) document.getElementById('status').textContent='PRIVATE DIGITAL WORLD';
+    if(d.title) document.getElementById('status').textContent='私人数字世界';
   }catch(e){}
 }
 function openRoom(name){
-  if(name==='MEMORY'){renderMemory();roomTitle.textContent='MEMORY';roomSub.textContent='PRIVATE ARCHIVE'}
+  if(name==='记忆'){renderMemory();roomTitle.textContent='记忆';roomSub.textContent='私人记忆档案'}
   else if(name==='CONTROL'){location.href='/control';return}
-  else {gallery.innerHTML='<div class="empty">THIS ROOM IS BEING FORMED · THE WORLD WILL EXPAND HERE</div>';roomTitle.textContent=name;roomSub.textContent='COMING INTO BEING'}
+  else {gallery.innerHTML='<div class="empty">这个空间正在形成 · 世界会在这里继续生长</div>';roomTitle.textContent=name;roomSub.textContent='正在形成'}
   room.classList.add('show');room.setAttribute('aria-hidden','false');
 }
 function renderMemory(){
-  if(!memories.length){gallery.innerHTML='<div class="empty">NO MEMORY HAS BEEN PLACED HERE YET</div>';return}
-  gallery.innerHTML=memories.map(m=>`<article class="tile"><img src="${m.file}" alt=""><div class="meta">${escapeHtml(m.title||'Untitled Memory')}<small>${escapeHtml(m.date||'')}</small></div></article>`).join('');
+  if(!memories.length){gallery.innerHTML='<div class="empty">NO 记忆 HAS BEEN PLACED HERE YET</div>';return}
+  gallery.innerHTML=memories.map(m=>`<article class="tile"><img src="${m.file}" alt=""><div class="meta">${escapeHtml(m.title||'未命名记忆')}<small>${escapeHtml(m.date||'')}</small></div></article>`).join('');
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 document.getElementById('close').addEventListener('click',()=>room.classList.remove('show'));

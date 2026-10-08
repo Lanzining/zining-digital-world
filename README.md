@@ -1,6 +1,6 @@
-# L · ZINING — V14 · Spatial Liquid Glass
+# L · ZINING — V15 · Spatial Liquid Glass
 
-V14 是第一阶段 **Spatial Core**：把首页从“网页”改成一个可进入的数字空间。
+V15 是第一阶段 **Spatial Core · L Identity**：把首页从“网页”改成一个可进入的数字空间。
 
 ### 本版重点
 - 深灰/冷银/雾蓝基底，降低纯黑与廉价霓虹感
@@ -20,3 +20,6 @@ V14 是第一阶段 **Spatial Core**：把首页从“网页”改成一个可�
 - Start Command：`uvicorn server.server:app --host 0.0.0.0 --port $PORT`
 
 本版没有修改已有后台认证和 Memory API。
+
+
+V15 视觉修正：移除中心巨大圆环；增强 L 的白色/银色辨识度、光晕、呼吸与进入动画；界面中文化；保留空间玻璃与鼠标光场。
